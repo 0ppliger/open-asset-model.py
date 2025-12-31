@@ -1,0 +1,1 @@
+A Python3 port of the [Open Asset Model](https://github.com/owasp-amass/open-asset-model).
