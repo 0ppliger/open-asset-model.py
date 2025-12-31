@@ -1,7 +1,10 @@
-from dataclasses import dataclass, asdict
-from asset import Asset, AssetType
-import json
+from dataclasses import dataclass
+from asset import Asset
+from asset import AssetType
 from typing import Optional
+from urllib.parse import urlparse
+
+
 
 @dataclass
 class URL(Asset):
@@ -24,10 +27,25 @@ class URL(Asset):
     def asset_type(self) -> AssetType:
         return AssetType.URL
 
+    @staticmethod
+    def from_text(url: str) -> 'URL':
+        o = urlparse(url)
+        return URL(
+            raw=url,
+            scheme=o.scheme,
+            host=o.hostname,
+            path=o.path,
+            username=o.username,
+            password=o.password,
+            port=o.port,
+            options=o.query,
+            fragment=o.fragment
+        )
+    
     def to_dict(self) -> dict:
         return {
             key: value for key, value in {
-                'raw': self.raw,
+                'url': self.raw,
                 'scheme': self.scheme,
                 'host': self.host,
                 'path': self.path,
