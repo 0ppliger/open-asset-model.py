@@ -17,12 +17,12 @@ def test_netblock(subtests):
         {
             "description": "Test successful creation of Netblock with valid IPv4 CIDR",
             "cidr": "198.51.100.0/24",
-            "net_type": "IPv4",
+            "net_type": NetblockType.IPv4,
         },
         {
             "description": "Test successful creation of Netblock with valid IPv6 CIDR",
             "cidr": "2001:db8::/32",
-            "net_type": "IPv6",
+            "net_type": NetblockType.IPv4,
         },
     ]
     

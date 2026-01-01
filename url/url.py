@@ -33,7 +33,7 @@ class URL(Asset):
         return URL(
             raw=url,
             scheme=o.scheme,
-            host=o.hostname,
+            host=o.hostname or "",
             path=o.path,
             username=o.username,
             password=o.password,
