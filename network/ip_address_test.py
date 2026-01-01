@@ -58,5 +58,5 @@ def test_ip_address_json(subtests):
             ip_address = IPAddress(address=ip, type=tt["net_type"])
 
             json_data = ip_address.to_json()  # Assuming a JSON method is implemented
-            expected_json = json.dumps({"address": tt["ip"], "type": tt["net_type"].value})
+            expected_json = json.dumps({"address": tt["ip"], "type": tt["net_type"]})
             assert json_data == expected_json

@@ -3,7 +3,7 @@ from asset import Asset
 from asset import  AssetType
 from enum import Enum
 
-class IPAddressType(Enum):
+class IPAddressType(str, Enum):
     IPv4 = "IPv4"
     IPv6 = "IPv6"
 
