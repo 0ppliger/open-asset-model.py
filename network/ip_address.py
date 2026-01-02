@@ -24,5 +24,5 @@ class IPAddress(Asset):
     def to_dict(self) -> dict:
         return {
             'address': self.address,
-            'type': self.type.value
+            'type': self.type
         }

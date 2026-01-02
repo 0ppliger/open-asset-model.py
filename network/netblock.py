@@ -24,5 +24,5 @@ class Netblock(Asset):
     def to_dict(self) -> dict:
         return {
             'cidr': self.cidr,
-            'type': self.type.value
+            'type': self.type
         }

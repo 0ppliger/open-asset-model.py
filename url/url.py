@@ -4,8 +4,6 @@ from asset import AssetType
 from typing import Optional
 from urllib.parse import urlparse
 
-
-
 @dataclass
 class URL(Asset):
     """URL represents a URL."""
