@@ -1,4 +1,5 @@
 from enum import Enum
+from typing import Optional
 from dataclasses import dataclass
 from dataclasses import field
 from oam.relation import Relation
@@ -9,15 +10,15 @@ from oam.property import PropertyType
 @dataclass
 class RRHeader:
     rr_type: int
-    cls:     int
-    ttl:     int
+    cls:     Optional[int] = None
+    ttl:     Optional[int] = None
 
     def to_dict(self) -> dict:
-        return {
+        return {key: value for key, value in {
             'rr_type': self.rr_type,
             'class': self.cls,
             'ttl': self.ttl
-        }
+        }.items() if value is not None}
 
 @dataclass
 class BasicDNSRelation(Relation):
