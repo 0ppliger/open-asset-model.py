@@ -25,8 +25,8 @@ def test_simple_relation():
     assert sr.name == "anything"
     assert sr.relation_type == RelationType.SimpleRelation
 
-    json_data = sr.to_json()
-    assert json_data == json.dumps({"label":"anything"})
+    expected = {"label":"anything"}
+    assert sr.to_dict() == expected
 
 
 def test_simple_property_name():
@@ -54,5 +54,8 @@ def test_simple_property():
     assert sp.property_value == "foobar"
     assert sp.property_type == PropertyType.SimpleProperty
 
-    json_data = sp.to_json()
-    assert json_data == json.dumps({"property_name":"anything", "property_value":"foobar"})
+    expected_json = {
+        "property_name":"anything",
+        "property_value":"foobar"
+    }
+    assert sp.to_dict() == expected_json

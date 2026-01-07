@@ -22,5 +22,5 @@ def test_autonomous_system_creation():
 def test_autonomous_system_json():
     as_system = AutonomousSystem(number=64496)
 
-    expected_json = json.dumps({"number": 64496})
-    assert as_system.to_dict() == json.loads(expected_json)
+    expected_json = {"number": 64496}
+    assert as_system.to_dict() == expected_json

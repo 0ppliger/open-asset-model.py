@@ -28,6 +28,9 @@ def test_source_property_creation():
 def test_source_property_json_serialization():
     sp = SourceProperty(source="anything", confidence=80)
 
-    json_data = sp.to_json()
+    expected = {
+        "name": "anything",
+        "confidence": 80
+    }
     
-    assert json_data == '{"name": "anything", "confidence": 80}'
+    assert sp.to_dict() == expected

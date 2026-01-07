@@ -25,14 +25,14 @@ def test_phone_json():
         ext="123",
     )
 
-    expected_json = json.dumps({
+    expected_json = {
         "raw":"123-456-7890 Ext. 123",
         "e164":"+1234567890",
         "type":"mobile",
         "country_abbrev":"US",
         "country_code":1,
         "ext":"123"
-    })
+    }
 
-    phone_json = p.to_json()
+    phone_json = p.to_dict()
     assert phone_json == expected_json

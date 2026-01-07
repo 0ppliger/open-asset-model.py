@@ -25,7 +25,11 @@ def test_file_json():
         name="index.html",
         type="Document",
     )
-    expected = json.dumps({"url": "file:///var/html/index.html", "name": "index.html", "type": "Document"})
-    actual = f.to_json()
+    expected = {
+        "url": "file:///var/html/index.html",
+        "name": "index.html",
+        "type": "Document"
+    }
+    actual = f.to_dict()
 
     assert actual == expected

@@ -19,8 +19,10 @@ def test_contact_record_asset_type():
 def test_contact_record_json():
     cr = ContactRecord(discovered_at="https://owasp.org")
     
-    expected_json = json.dumps({"discovered_at": "https://owasp.org"})
+    expected_json = {
+        "discovered_at": "https://owasp.org"
+    }
     
-    json_data = cr.to_json()
+    json_data = cr.to_dict()
     
     assert json_data == expected_json

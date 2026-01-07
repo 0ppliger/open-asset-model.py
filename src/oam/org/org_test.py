@@ -28,7 +28,7 @@ def test_organization_json():
         non_profit=False,
         headcount=10000,
     )
-    expected = json.dumps({
+    expected = {
         "unique_id": "222333444",
         "name": "Acme Inc.",
         "legal_name": "Acme Inc.",
@@ -40,6 +40,6 @@ def test_organization_json():
         "active": True,
         "non_profit": False,
         "headcount": 10000
-    })
-    actual = o.to_json()
+    }
+    actual = o.to_dict()
     assert actual == expected

@@ -22,8 +22,8 @@ def test_successful_creation_of_fqdn_with_valid_name_and_tld():
 def test_successful_json_serialization_of_fqdn_with_valid_name_and_tld():
     fqdn = FQDN(name="foo.example.com")
     
-    json_data = fqdn.to_json()
+    json_data = fqdn.to_dict()
     expected_json = {"name":"foo.example.com"}
-    assert json_data == json.dumps(expected_json)
+    assert json_data == expected_json
 
 

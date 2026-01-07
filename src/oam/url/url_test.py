@@ -5,11 +5,11 @@ from oam.asset import AssetType
 
 def test_url_key():
     want = "https://owasp.org/"
-    url = URL.from_text(want)
+    url = URL(want)
     assert url.key == want
         
 def test_url_asset_type():
-    url = URL.from_text("https://owasp.org/")
+    url = URL("https://owasp.org/")
     assert url.asset_type == AssetType.URL
 
 def test_url_implements_asset():

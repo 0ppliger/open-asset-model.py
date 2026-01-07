@@ -26,7 +26,7 @@ def test_funds_transfer_json():
         exchange_date="2013-07-24T14:15:00Z",
         exchange_rate=0.9,
     )
-    expected = json.dumps({
+    expected = {
         "unique_id": "222333444",
         "amount": 42.0,
         "reference_number": "555666777",
@@ -34,6 +34,6 @@ def test_funds_transfer_json():
         "transfer_method": "ACH",
         "exchange_date": "2013-07-24T14:15:00Z",
         "exchange_rate": 0.9
-    })
+    }
     
-    assert ft.to_json() == expected
+    assert ft.to_dict() == expected

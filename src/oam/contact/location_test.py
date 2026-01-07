@@ -48,4 +48,4 @@ def test_location_json():
     }
 
     json_data = loc.to_dict()
-    assert json.dumps(json_data) == json.dumps(expected_json)
+    assert json_data == expected_json

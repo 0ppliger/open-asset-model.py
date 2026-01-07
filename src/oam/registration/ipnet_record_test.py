@@ -51,7 +51,19 @@ def test_ipnet_record():
     assert record.asset_type == AssetType.IPNetRecord
 
     # Test JSON method
-    expected_json = json.dumps({"cidr": "150.154.0.0/16", "handle": "NET-150-154-0-0-1", "start_address": "150.154.0.0", "end_address": "150.154.255.255", "type": "IPv4", "name": "REV-MVCC", "method": "DIRECT ALLOCATION", "parent_handle": "NET-150-0-0-0-0", "whois_server": "whois.arin.net", "created_date": "1991-05-20 04:00:00", "updated_date": "2024-03-28 18:47:50", "status": ["active"]})
+    expected_json = {
+        "cidr": "150.154.0.0/16",
+        "handle": "NET-150-154-0-0-1",
+        "start_address": "150.154.0.0",
+        "end_address": "150.154.255.255",
+        "type": "IPv4",
+        "name": "REV-MVCC",
+        "method": "DIRECT ALLOCATION",
+        "parent_handle": "NET-150-0-0-0-0",
+        "whois_server": "whois.arin.net",
+        "created_date": "1991-05-20 04:00:00",
+        "updated_date": "2024-03-28 18:47:50",
+        "status": ["active"]}
     
-    json_data = record.to_json()
+    json_data = record.to_dict()
     assert json_data == expected_json

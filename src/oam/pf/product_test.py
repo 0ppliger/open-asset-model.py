@@ -36,9 +36,9 @@ def test_product_json():
         "country_of_origin": "US"
     }
     
-    actual = p.to_json()
+    actual = p.to_dict()
     
-    assert actual == json.dumps(expected)
+    assert actual == expected
 
 def test_product_release_key():
     want = "Amass v4.2.0"
@@ -64,6 +64,6 @@ def test_product_release_json():
         "release_date": "2023-09-10T14:15:00Z"
     }
     
-    actual = p.to_json()
+    actual = p.to_dict()
     
-    assert actual == json.dumps(expected)
+    assert actual == expected

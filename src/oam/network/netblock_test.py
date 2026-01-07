@@ -52,7 +52,7 @@ def test_netblock_json(subtests):
         with subtests.test(tt["description"]):
             netblock = Netblock(cidr=tt["cidr"], type=tt["type"])
 
-            json_data = netblock.to_json()
+            json_data = netblock.to_dict()
             
-            expected_json = json.dumps({"cidr": tt["cidr"], "type": tt["type"]})
+            expected_json = {"cidr": tt["cidr"], "type": tt["type"]}
             assert json_data == expected_json

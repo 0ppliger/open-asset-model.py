@@ -60,4 +60,4 @@ def test_autnum_record():
     }
     json_output = record.to_dict()
     
-    assert json.dumps(json_output, sort_keys=True) == json.dumps(expected_json, sort_keys=True)
+    assert json_output == expected_json

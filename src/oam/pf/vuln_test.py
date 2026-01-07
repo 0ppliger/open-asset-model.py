@@ -59,13 +59,13 @@ def test_vuln_property_json_serialization():
         reference="URL",
     )
 
-    json_data = sp.to_json()
-    expected_json = json.dumps({ 
+    json_data = sp.to_dict()
+    expected_json = { 
         "id": "CVE-2019-00001",
         "desc": "foobar",
         "source": "Tenable",
         "category": "Firewall",
         "enum": "CVE",
         "ref": "URL"
-    })
+    }
     assert json_data == expected_json

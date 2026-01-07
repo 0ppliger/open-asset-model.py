@@ -29,13 +29,13 @@ def test_domain_record():
     assert record.asset_type == AssetType.DomainRecord
 
     # Test JSON method
-    expected_json = json.dumps({
+    expected_json = {
         "domain":"example.com",
         "created_date":"2020-01-01",
         "updated_date":"2021-01-01",
         "expiration_date":"2022-01-01",
         "status":["active","clientTransferProhibited"],
         "dnssec":True
-    })
-    actual_json = record.to_json()
+    }
+    actual_json = record.to_dict()
     assert actual_json == expected_json

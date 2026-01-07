@@ -84,4 +84,4 @@ def test_tls_certificate_json():
     }
     json_output = cert.to_dict()
     
-    assert json.dumps(json_output) == json.dumps(expected_json)
+    assert json_output == expected_json

@@ -29,7 +29,7 @@ def test_person_json():
         gender="Male",
     )
 
-    expected_json = json.dumps({
+    expected_json = {
         "unique_id": "222333444",
         "full_name": "John Jacob Doe",
         "first_name": "John",
@@ -37,8 +37,8 @@ def test_person_json():
         "family_name": "Doe",
         "birth_date": "01/01/1970",
         "gender": "Male"
-    })
+    }
 
-    json_data = p.to_json()
+    json_data = p.to_dict()
 
     assert json_data == expected_json

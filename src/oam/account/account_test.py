@@ -43,4 +43,4 @@ def test_account_json():
     }
     actual = a.to_dict()
 
-    assert json.dumps(actual) == json.dumps(expected)
+    assert actual == expected

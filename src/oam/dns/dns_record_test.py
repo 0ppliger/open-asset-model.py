@@ -34,12 +34,14 @@ def test_basic_dns_relation():
     assert dr.header.ttl == 86400
     assert dr.relation_type == RelationType.BasicDNSRelation
 
-    json_data = dr.to_json()
+    json_data = dr.to_dict()
     expected_json = {
         "label": "dns_record",
-        "header": {"rr_type": 1, "class": 1, "ttl": 86400}
+        "header_rrtype": 1,
+        "header_class": 1,
+        "header_ttl": 86400
     }
-    assert json.loads(json_data) == expected_json
+    assert json_data == expected_json
 
 def test_pref_dns_relation_name():
     want = "dns_record"
@@ -68,13 +70,15 @@ def test_pref_dns_relation():
     assert pr.preference == 5
     assert pr.relation_type is RelationType.PrefDNSRelation
 
-    json_data = pr.to_json()
+    json_data = pr.to_dict()
     expected_json = {
         "label": "dns_record",
-        "header": {"rr_type": 1, "class": 1, "ttl": 86400},
         "preference": 5,
+        "header_rrtype": 1,
+        "header_class": 1,
+        "header_ttl": 86400,
     }
-    assert json.loads(json_data) == expected_json
+    assert json_data == expected_json
 
 def test_srv_dns_relation_name():
     want = "dns_record"
@@ -109,15 +113,17 @@ def test_srv_dns_relation():
     assert sr.port == 80
     assert sr.relation_type is RelationType.SRVDNSRelation
 
-    json_data = sr.to_json()
+    json_data = sr.to_dict()
     expected_json = {
         "label": "dns_record",
-        "header": {"rr_type": 1, "class": 1, "ttl": 86400},
+        "header_rrtype": 1,
+        "header_class": 1,
+        "header_ttl": 86400,
         "priority": 10,
         "weight": 5,
         "port": 80,
     }
-    assert json.loads(json_data) == expected_json
+    assert json_data == expected_json
 
 def test_dns_record_property_name():
     p = DNSRecordProperty(
@@ -151,10 +157,12 @@ def test_dns_record_property():
     assert p.data == "foobar"
     assert p.property_type is PropertyType.DNSRecordProperty
 
-    json_data = p.to_json()
+    json_data = p.to_dict()
     expected_json = {
         "property_name": "anything",
-        "header": {"rr_type": 16, "class": 1, "ttl": 86400},
-        "data": "foobar"
+        "data": "foobar",
+        "header_rrtype": 16,
+        "header_class": 1,
+        "header_ttl": 86400,
     }
-    assert json.loads(json_data) == expected_json
+    assert json_data == expected_json

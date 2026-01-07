@@ -24,11 +24,11 @@ def test_service_json():
         attributes={"server": ["nginx-1.26.0"]}
     )
 
-    expected_json = json.dumps({
+    expected_json = {
         "unique_id": "222333444",
         "service_type": "HTTP",
         "output": "Hello",
         "output_length": 5,
-        "attributes": {"server": ["nginx-1.26.0"]}})
-    json_data = s.to_json()
+        "attributes": {"server": ["nginx-1.26.0"]}}
+    json_data = s.to_dict()
     assert json_data == expected_json

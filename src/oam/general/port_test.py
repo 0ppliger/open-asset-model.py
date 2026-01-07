@@ -36,7 +36,11 @@ def test_port_relation_json_serialization():
         protocol="tcp"
     )
 
-    json_data = pr.to_json()
-    expected_json = json.dumps({"label": "port", "port_number": 80, "protocol": "tcp"})
+    json_data = pr.to_dict()
+    expected_json = {
+        "label": "port",
+        "port_number": 80,
+        "protocol": "tcp"
+    }
     
     assert json_data == expected_json
