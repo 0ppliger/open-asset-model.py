@@ -27,19 +27,3 @@ class DomainRecord(Asset):
     @property
     def asset_type(self) -> AssetType:
         return AssetType.DomainRecord
-
-    def to_dict(self) -> dict:
-        return {key: value for key, value in {
-            "raw": self.raw,
-            "id": self.id,
-            "domain": self.domain,
-            "punycode": self.punycode,
-            "name": self.name,
-            "extension": self.extension,
-            "whois_server": self.whois_server,
-            "created_date": self.created_date,
-            "updated_date": self.updated_date,
-            "expiration_date": self.expiration_date,
-            "status": self.status,
-            "dnssec": self.dnssec,
-        }.items() if value is not None}

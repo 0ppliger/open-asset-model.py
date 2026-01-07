@@ -1,9 +1,10 @@
 import json
+from oam.oam_object import OAMObject
 from abc import ABC
 from abc import abstractmethod
 from enum import Enum
 
-class AssetType(Enum):
+class AssetType(str, Enum):
     Account = "Account"
     AutnumRecord = "AutnumRecord"
     AutonomousSystem = "AutonomousSystem"
@@ -26,7 +27,7 @@ class AssetType(Enum):
     TLSCertificate = "TLSCertificate"
     URL = "URL"
 
-class Asset(ABC):
+class Asset(OAMObject):
     @property
     @abstractmethod
     def key(self) -> str:
@@ -37,11 +38,5 @@ class Asset(ABC):
     def asset_type(self) -> AssetType:
         pass
 
-    @abstractmethod
-    def to_dict(self) -> dict:
-        pass
-    
-    def to_json(self) -> str:
-        return json.dumps(self.to_dict())
-
 AssetList = list(AssetType)
+

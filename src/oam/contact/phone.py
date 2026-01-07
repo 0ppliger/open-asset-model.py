@@ -18,7 +18,7 @@ class Phone(Asset):
     """This struct represents the phone number, whether it is fax,
     mobile, or home number linked to the possible asset."""
     raw:            str
-    e164:           str  # E.164 format
+    e164:           Optional[str] = None  # E.164 format
     type:           Optional[str] = None
     country_abbrev: Optional[str] = None
     country_code:   Optional[int] = None
@@ -46,13 +46,3 @@ class Phone(Asset):
             country_abbrev = region,
             ext = o.extension or None
         )
-
-    def to_dict(self) -> dict:
-        return {key: value for key, value in {
-            "raw": self.raw,
-            "e164": self.e164,
-            "type": self.type,
-            "country_abbrev": self.country_abbrev,
-            "country_code": self.country_code,
-            "ext": self.ext,
-        }.items() if value is not None}

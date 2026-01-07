@@ -1,15 +1,16 @@
 import json
-from abc import ABC
+from oam.oam_object import OAMObject
 from abc import abstractmethod
 from enum import Enum
+from dataclasses import dataclass
 
-class PropertyType(Enum):
+class PropertyType(str, Enum):
     DNSRecordProperty = "DNSRecordProperty"
     SimpleProperty = "SimpleProperty"
     SourceProperty = "SourceProperty"
     VulnProperty = "VulnProperty"
 
-class Property(ABC):
+class Property(OAMObject):
     @property
     @abstractmethod
     def name(self) -> str:
@@ -24,13 +25,5 @@ class Property(ABC):
     @abstractmethod
     def property_type(self) -> PropertyType:
         pass
-
-    @abstractmethod
-    def to_dict(self) -> dict:
-        pass
-    
-    def to_json(self) -> str:
-        return json.dumps(self.to_dict())
-
 
 PropertyList = list(PropertyType)

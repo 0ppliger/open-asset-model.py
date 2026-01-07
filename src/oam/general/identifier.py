@@ -2,6 +2,7 @@ from enum import Enum
 from oam.asset import Asset
 from oam.asset import AssetType
 from dataclasses import dataclass
+from dataclasses import field
 from typing import Optional
 
 class IdentifierType(str, Enum):
@@ -54,9 +55,9 @@ class Identifier(Asset):
     """
     unique_id:       str
     id:              str
-    type:            IdentifierType
+    type:            IdentifierType = field(metadata={"json":"id_type"})
     creation_date:   Optional[str] = None
-    updated_date:    Optional[str] = None
+    update_date:     Optional[str] = None
     expiration_date: Optional[str] = None
     status:          Optional[str] = None
 
@@ -67,15 +68,3 @@ class Identifier(Asset):
     @property
     def asset_type(self) -> AssetType:
         return AssetType.Identifier
-
-    def to_dict(self) -> dict:
-        return {
-            key: value for key, value in {
-                "unique_id": self.unique_id,
-                "id": self.id,
-                "id_type": self.type,
-                "creation_date": self.creation_date,
-                "update_date": self.updated_date,
-                "expiration_date": self.expiration_date,
-                "status": self.status
-            }.items() if value is not None}

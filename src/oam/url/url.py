@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from dataclasses import field
 from typing import Optional
 from urllib.parse import urlparse
 from oam.asset import Asset
@@ -7,10 +8,10 @@ from oam.asset import AssetType
 @dataclass
 class URL(Asset):
     """URL represents a URL."""
-    raw:      str
-    scheme:   str
-    host:     str
-    path:     str
+    raw:      str           = field(metadata={"json":"url"})
+    scheme:   Optional[str] = None
+    host:     Optional[str] = None
+    path:     Optional[str] = None
     username: Optional[str] = None
     password: Optional[str] = None
     port:     Optional[int] = None
@@ -39,17 +40,3 @@ class URL(Asset):
             options=o.query,
             fragment=o.fragment
         )
-    
-    def to_dict(self) -> dict:
-        return {
-            key: value for key, value in {
-                'url': self.raw,
-                'scheme': self.scheme,
-                'host': self.host,
-                'path': self.path,
-                'username': self.username,
-                'password': self.password,
-                'port': self.port,
-                'options': self.options,
-                'fragment': self.fragment
-            }.items() if value is not None}

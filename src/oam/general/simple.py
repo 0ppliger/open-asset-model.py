@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from dataclasses import field
 from enum import Enum
 from typing import Dict
 import json
@@ -9,7 +10,7 @@ from oam.relation import Relation, RelationType
 class SimpleRelation(Relation):
     """SimpleRelation represents a simple relation in the graph with
     no additional data required."""
-    name: str
+    name: str = field(metadata={"json":"label"})
 
     @property
     def label(self) -> str:
@@ -18,9 +19,6 @@ class SimpleRelation(Relation):
     @property
     def relation_type(self) -> RelationType:
         return RelationType.SimpleRelation
-
-    def to_dict(self) -> Dict:
-        return {'label': self.label}
 
 @dataclass
 class SimpleProperty(Property):
@@ -41,4 +39,7 @@ class SimpleProperty(Property):
         return PropertyType.SimpleProperty
 
     def to_dict(self) -> Dict:
-        return {'property_name': self.name, 'property_value': self.value}
+        return {
+            'property_name': self.name,
+            'property_value': self.value
+        }

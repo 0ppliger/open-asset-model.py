@@ -26,19 +26,3 @@ class Location(Asset):
     @property
     def asset_type(self) -> AssetType:
         return AssetType.Location
-
-    def to_dict(self) -> dict:
-        return {key: value for key, value in {
-            "address": self.address,
-            "building": self.building,
-            "building_number": self.building_number,
-            "street_name": self.street_name,
-            "unit": self.unit,
-            "po_box": self.po_box,
-            "city": self.city,
-            "locality": self.locality,
-            "province": self.province,
-            "country": self.country,
-            "postal_code": self.postal_code,
-            "gln": self.gln,
-        }.items() if value is not None}

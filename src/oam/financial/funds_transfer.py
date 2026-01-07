@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from dataclasses import field
 from typing import Optional
 from enum import Enum
 from oam.property import PropertyType
@@ -12,11 +13,11 @@ class FundsTransfer(Asset):
     - Recipient financial account (e.g. Account)
     - IBIN and SWIFT codes
     """
-    id:               str
+    id:               str = field(metadata={"json":"unique_id"})
     amount:           float
     reference_number: Optional[str] = None
     currency:         Optional[str] = None
-    method:           Optional[str] = None
+    method:           Optional[str] = field(default=None, metadata={"json":"transfer_method"})
     exchange_date:    Optional[str] = None
     exchange_rate:    Optional[float] = None
 

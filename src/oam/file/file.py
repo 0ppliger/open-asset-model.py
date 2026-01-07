@@ -16,10 +16,3 @@ class File(Asset):
     @property
     def asset_type(self) -> AssetType:
         return AssetType.File
-
-    def to_dict(self) -> dict:
-        return {key: value for key, value in {
-            "url": self.url,
-            "name": self.name,
-            "type": self.type,
-        }.items() if value is not None}

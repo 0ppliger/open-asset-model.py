@@ -1,6 +1,6 @@
+phonenumbers
 pytest
 pytest-subtests
 pyright
-phonenumbers
 build
 twine

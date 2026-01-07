@@ -14,8 +14,3 @@ class ContactRecord(Asset):
     @property
     def asset_type(self) -> AssetType:
         return AssetType.ContactRecord
-
-    def to_dict(self) -> dict:
-        return {
-            "discovered_at": self.discovered_at,
-        }

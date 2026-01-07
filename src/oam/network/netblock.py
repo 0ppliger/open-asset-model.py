@@ -20,9 +20,3 @@ class Netblock(Asset):
     @property
     def asset_type(self) -> AssetType:
         return AssetType.Netblock
-
-    def to_dict(self) -> dict:
-        return {
-            'cidr': self.cidr,
-            'type': self.type
-        }

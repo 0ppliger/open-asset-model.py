@@ -20,9 +20,3 @@ class IPAddress(Asset):
     @property
     def asset_type(self) -> AssetType:
         return AssetType.IPAddress
-
-    def to_dict(self) -> dict:
-        return {
-            'address': self.address,
-            'type': self.type
-        }

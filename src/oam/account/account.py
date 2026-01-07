@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from dataclasses import field
 from typing import Optional
 from enum import Enum
 from oam.asset import Asset
@@ -13,12 +14,12 @@ class Account(Asset):
     - Funds transfers
     - IBAN and SWIFT codes
     """
-    id:             str
+    id:             str = field(metadata={"json":"unique_id"})
     account_type:   str
-    username:       Optional[str] = None
-    account_number: Optional[str] = None
+    username:       Optional[str]   = None
+    account_number: Optional[str]   = None
     balance:        Optional[float] = None
-    active:         Optional[bool] = None
+    active:         Optional[bool]  = None
 
     @property
     def key(self) -> str:
@@ -27,14 +28,3 @@ class Account(Asset):
     @property
     def asset_type(self) -> AssetType:
         return AssetType.Account
-
-    def to_dict(self) -> dict:
-        return {
-            key: value for key, value in {
-                "unique_id": self.id,
-                "account_type": self.account_type,
-                "username": self.username,
-                "account_number": self.account_number,
-                "balance": self.balance,
-                "active": self.active,
-            }.items() if value is not None}

@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from dataclasses import field
 from typing import Optional
 from enum import Enum
 from oam.asset import Asset
@@ -14,9 +15,9 @@ class Product(Asset):
     - Website
     - Product releases
     """
-    id:                str
-    name:              str
-    type:              str
+    id:                str = field(metadata={"json":"unique_id"})
+    name:              str = field(metadata={"json":"product_name"})
+    type:              str = field(metadata={"json":"product_type"})
     category:          Optional[str] = None
     description:       Optional[str] = None
     country_of_origin: Optional[str] = None
@@ -28,16 +29,6 @@ class Product(Asset):
     @property
     def asset_type(self) -> AssetType:
         return AssetType.Product
-
-    def to_dict(self) -> dict:
-        return {key: value for key, value in {
-            "unique_id": self.id,
-            "product_name": self.name,
-            "product_type": self.type,
-            "category": self.category,
-            "description": self.description,
-            "country_of_origin": self.country_of_origin,
-        }.items() if value is not None}
 
 @dataclass
 class ProductRelease(Asset):
@@ -69,9 +60,3 @@ class ProductRelease(Asset):
     @property
     def asset_type(self) -> AssetType:
         return AssetType.ProductRelease
-
-    def to_dict(self) -> dict:
-        return {key: value for key, value in {
-            "name": self.name,
-            "release_date": self.release_date,
-        }.items() if value is not None}

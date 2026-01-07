@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from dataclasses import field
 from typing import List, Optional
 from enum import Enum
 from oam.asset import Asset, AssetType
@@ -26,7 +27,7 @@ class Organization(Asset):
     - Contact information
     - Founder, sponsorships, and funding sources
     """
-    id: str
+    id: str = field(metadata={"json":"unique_id"})
     name: str
     legal_name:      Optional[str] = None
     founding_date:   Optional[str] = None
@@ -45,18 +46,3 @@ class Organization(Asset):
     @property
     def asset_type(self) -> AssetType:
         return AssetType.Organization
-
-    def to_dict(self) -> dict:
-        return {key: value for key, value in {
-            "unique_id": self.id,
-            "name": self.name,
-            "legal_name": self.legal_name,
-            "founding_date": self.founding_date,
-            "jurisdiction": self.jurisdiction,
-            "registration_id": self.registration_id,
-            "industry": self.industry,
-            "target_markets": self.target_markets,
-            "active": self.active,
-            "non_profit": self.non_profit,
-            "headcount": self.headcount,
-        }.items() if value is not None}

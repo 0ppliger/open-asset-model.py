@@ -14,6 +14,3 @@ class AutonomousSystem(Asset):
     @property
     def asset_type(self) -> AssetType:
         return AssetType.AutonomousSystem
-
-    def to_dict(self) -> dict:
-        return {'number': self.number}

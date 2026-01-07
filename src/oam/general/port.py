@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from dataclasses import field
 from oam.relation import Relation, RelationType
 import json
 
@@ -6,7 +7,7 @@ import json
 class PortRelation(Relation):
     """PortRelation is a relation in the graph representing an open
     port."""
-    name: str
+    name: str = field(metadata={"json":"label"})
     port_number: int
     protocol: str
     
@@ -17,10 +18,3 @@ class PortRelation(Relation):
     @property
     def relation_type(self) -> RelationType:
         return RelationType.PortRelation
-
-    def to_dict(self) -> dict:
-        return {
-            'label': self.label,
-            'port_number': self.port_number,
-            'protocol': self.protocol
-        }

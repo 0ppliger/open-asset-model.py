@@ -14,8 +14,3 @@ class FQDN(Asset):
     @property
     def asset_type(self) -> AssetType:
         return AssetType.FQDN
-
-    def to_dict(self) -> dict:
-        return {
-            'name': self.key
-        }

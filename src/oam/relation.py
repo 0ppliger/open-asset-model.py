@@ -1,18 +1,19 @@
 import json
-from abc import ABC
+from oam.oam_object import OAMObject
 from abc import abstractmethod
 from enum import Enum
 from typing import List
 from oam.asset import AssetType
+from dataclasses import dataclass
 
-class RelationType(Enum):
+class RelationType(str, Enum):
     BasicDNSRelation = "BasicDNSRelation"
     PortRelation = "PortRelation"
     PrefDNSRelation = "PrefDNSRelation"
     SimpleRelation = "SimpleRelation"
     SRVDNSRelation = "SRVDNSRelation"
 
-class Relation(ABC):
+class Relation(OAMObject):
     @property
     @abstractmethod
     def label(self) -> str:
@@ -23,13 +24,6 @@ class Relation(ABC):
     def relation_type(self) -> RelationType:
         pass
 
-    @abstractmethod
-    def to_dict(self) -> dict:
-        pass
-    
-    def to_json(self) -> str:
-        return json.dumps(self.to_dict())
-    
 RelationList = list(RelationType)
 
 account_rels = {

@@ -24,15 +24,3 @@ class AutnumRecord(Asset):
     @property
     def asset_type(self) -> AssetType:
         return AssetType.AutnumRecord
-
-    def to_dict(self) -> dict:
-        return {key: value for key, value in {
-            "raw": self.raw,
-            "number": self.number,
-            "handle": self.handle,
-            "name": self.name,
-            "whois_server": self.whois_server,
-            "created_date": self.created_date,
-            "updated_date": self.updated_date,
-            "status": self.status,
-        }.items() if value is not None}
