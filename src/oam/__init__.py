@@ -7,6 +7,9 @@ from .property import PropertyList
 from .relation import Relation
 from .relation import RelationType
 from .relation import RelationList
+from .utils import get_asset_by_type
+from .utils import get_property_by_type
+from .utils import get_relation_by_type
 
 from .general import *
 from .network import *
