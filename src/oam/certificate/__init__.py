@@ -1,1 +1,3 @@
-from .tls_certificate import *
+from .tls_certificate import TLSCertificate
+from .tls_certificate import TLSKeyUsageType
+from .tls_certificate import TLSExtKeyUsageType

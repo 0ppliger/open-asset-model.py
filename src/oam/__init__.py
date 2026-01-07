@@ -1,6 +1,12 @@
-from .asset import *
-from .property import *
-from .relation import *
+from .asset import Asset
+from .asset import AssetType
+from .asset import AssetList
+from .property import Property
+from .property import PropertyType
+from .property import PropertyList
+from .relation import Relation
+from .relation import RelationType
+from .relation import RelationList
 
 from .general import *
 from .network import *

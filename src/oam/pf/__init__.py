@@ -1,3 +1,4 @@
-from .product import *
-from .service import *
-from .vuln import *
+from .product import Product
+from .product import ProductRelease
+from .service import Service
+from .vuln import VulnProperty

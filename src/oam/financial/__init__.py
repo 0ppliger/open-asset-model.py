@@ -1,1 +1,1 @@
-from .funds_transfer import *
+from .funds_transfer import FundsTransfer
