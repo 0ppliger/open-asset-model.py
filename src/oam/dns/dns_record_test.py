@@ -2,7 +2,6 @@ import pytest
 from oam.dns.dns_record import BasicDNSRelation
 from oam.dns.dns_record import PrefDNSRelation
 from oam.dns.dns_record import SRVDNSRelation
-from oam.dns.dns_record import RRHeader
 from oam.dns.dns_record import DNSRecordProperty
 from oam.relation import Relation
 from oam.relation import RelationType
@@ -14,7 +13,9 @@ def test_basic_dns_relation_name():
     want = "dns_record"
     br = BasicDNSRelation(
         name=want,
-        header=RRHeader(rr_type=1, cls=1, ttl=86400),
+        rrtype=1,
+        cls=1,
+        ttl=86400
     )
 
     assert br.label == want
@@ -25,13 +26,13 @@ def test_basic_dns_relation_implements_relation():
 def test_basic_dns_relation():
     dr = BasicDNSRelation(
         name="dns_record",
-        header=RRHeader(rr_type=1, cls=1, ttl=86400),
+        rrtype=1, cls=1, ttl=86400,
     )
 
     assert dr.name == "dns_record"
-    assert dr.header.rr_type == 1
-    assert dr.header.cls == 1
-    assert dr.header.ttl == 86400
+    assert dr.rrtype == 1
+    assert dr.cls == 1
+    assert dr.ttl == 86400
     assert dr.relation_type == RelationType.BasicDNSRelation
 
     json_data = dr.to_dict()
@@ -47,7 +48,7 @@ def test_pref_dns_relation_name():
     want = "dns_record"
     br = PrefDNSRelation(
         name=want,
-        header=RRHeader(rr_type=1, cls=1, ttl=86400),
+        rrtype=1, cls=1, ttl=86400,
         preference=5,
     )
 
@@ -59,14 +60,14 @@ def test_pref_dns_relation_implements_relation():
 def test_pref_dns_relation():
     pr = PrefDNSRelation(
         name="dns_record",
-        header=RRHeader(rr_type=1, cls=1, ttl=86400),
+        rrtype=1, cls=1, ttl=86400,
         preference=5,
     )
 
     assert pr.name == "dns_record"
-    assert pr.header.rr_type == 1
-    assert pr.header.cls == 1
-    assert pr.header.ttl == 86400
+    assert pr.rrtype == 1
+    assert pr.cls == 1
+    assert pr.ttl == 86400
     assert pr.preference == 5
     assert pr.relation_type is RelationType.PrefDNSRelation
 
@@ -84,7 +85,7 @@ def test_srv_dns_relation_name():
     want = "dns_record"
     br = SRVDNSRelation(
         name="dns_record",
-        header=RRHeader(rr_type=1, cls=1, ttl=86400),
+        rrtype=1, cls=1, ttl=86400,
         priority=10,
         weight=5,
         port=80
@@ -98,16 +99,16 @@ def test_srv_dns_relation_implements_relation():
 def test_srv_dns_relation():
     sr = SRVDNSRelation(
         name="dns_record",
-        header=RRHeader(rr_type=1, cls=1, ttl=86400),
+        rrtype=1, cls=1, ttl=86400,
         priority=10,
         weight=5,
         port=80
     )
 
     assert sr.name == "dns_record"
-    assert sr.header.rr_type == 1
-    assert sr.header.cls == 1
-    assert sr.header.ttl == 86400
+    assert sr.rrtype == 1
+    assert sr.cls == 1
+    assert sr.ttl == 86400
     assert sr.priority == 10
     assert sr.weight == 5
     assert sr.port == 80
@@ -128,7 +129,7 @@ def test_srv_dns_relation():
 def test_dns_record_property_name():
     p = DNSRecordProperty(
         property_name="anything",
-        header=RRHeader(rr_type=1, cls=1, ttl=86400),
+        rrtype=1, cls=1, ttl=86400,
         data="foobar"
     )
 
@@ -137,7 +138,7 @@ def test_dns_record_property_name():
 def test_dns_record_property_value():
     p = DNSRecordProperty(
         property_name="anything",
-        header=RRHeader(rr_type=1, cls=1, ttl=86400),
+        rrtype=1, cls=1, ttl=86400,
         data="foobar"
     )
 
@@ -149,7 +150,7 @@ def test_dns_record_property_implements_property():
 def test_dns_record_property():
     p = DNSRecordProperty(
         property_name="anything",
-        header=RRHeader(rr_type=16, cls=1, ttl=86400),
+        rrtype=16, cls=1, ttl=86400,
         data="foobar"
     )
 

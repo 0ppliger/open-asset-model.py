@@ -15,7 +15,7 @@ class IPNetRecord(Asset):
     updated_date:  str
     start_address: str
     end_address:   str
-    raw:           Optional[str]  = None
+    raw:           Optional[str] = None
     method:        Optional[str] = None
     country:       Optional[str] = None
     parent_handle: Optional[str] = None
