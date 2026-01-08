@@ -2,6 +2,7 @@ from dataclasses import fields
 from dataclasses import is_dataclass
 import inspect
 from typing import cast
+from typing import Type, TypeVar, Mapping, Any
 from oam.oam_object import OAMObject
 import oam
 
@@ -12,22 +13,22 @@ def _get_oam_obj_by_name(name: str) -> type[OAMObject]:
 
     raise Exception("unsupported oam object")
 
-def get_property_by_type(type: oam.PropertyType) -> oam.Property:
+def get_property_by_type(type: oam.PropertyType) -> Type[oam.Property]:
     if type not in oam.PropertyList:
         raise Exception("unsupported relation type")
     return cast(oam.Property, _get_oam_obj_by_name(type.value))
 
-def get_relation_by_type(type: oam.RelationType) -> oam.Relation:
+def get_relation_by_type(type: oam.RelationType) -> Type[oam.Relation]:
     if type not in oam.RelationList:
         raise Exception("unsupported relation type")
     return cast(oam.Relation, _get_oam_obj_by_name(type.value))
 
-def get_asset_by_type(type: oam.AssetType) -> oam.Asset:
+def get_asset_by_type(type: oam.AssetType) -> Type[oam.Asset]:
     if type not in oam.AssetList:
         raise Exception("unsupported asset type")
     return cast(oam.Asset, _get_oam_obj_by_name(type.value))
 
-def describe_oam_object(o: type[OAMObject]) -> list:
+def describe_oam_object(o: Type[OAMObject]) -> list:
     d = []
     for field in fields(o):
         json_name = field.metadata["json"] if "json" in field.metadata else field.name
@@ -35,7 +36,9 @@ def describe_oam_object(o: type[OAMObject]) -> list:
             
     return d
 
-def make_oam_object_from_dict(o: type[OAMObject], d: dict) -> OAMObject:
+T = TypeVar("T")
+
+def make_oam_object_from_dict(o: Type[T], d: Mapping[str, Any]) -> T:
     real_d = {}
     o_fields = fields(o)
     for key, value in d.items():
