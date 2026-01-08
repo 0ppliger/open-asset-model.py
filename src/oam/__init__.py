@@ -7,9 +7,16 @@ from .property import PropertyList
 from .relation import Relation
 from .relation import RelationType
 from .relation import RelationList
+from .relation import asset_type_relations
+from .relation import get_asset_outgoing_relations
+from .relation import get_transform_asset_types
+from .relation import valid_relationship
 from .utils import get_asset_by_type
 from .utils import get_property_by_type
 from .utils import get_relation_by_type
+from .utils import describe_oam_object
+from .utils import make_oam_object_from_dict
+from .oam_object import OAMObject
 
 from .general import *
 from .network import *

@@ -1,12 +1,14 @@
+from dataclasses import fields
+from dataclasses import is_dataclass
 import inspect
 from typing import cast
 from oam.oam_object import OAMObject
 import oam
 
-def _get_oam_obj_by_name(name: str) -> OAMObject:
+def _get_oam_obj_by_name(name: str) -> type[OAMObject]:
     for [_name, cls] in inspect.getmembers(oam, inspect.isclass):
         if _name == name:
-            return cast(OAMObject, cls)
+            return cast(type[OAMObject], cls)
 
     raise Exception("unsupported oam object")
 
@@ -25,3 +27,22 @@ def get_asset_by_type(type: oam.AssetType) -> oam.Asset:
         raise Exception("unsupported asset type")
     return cast(oam.Asset, _get_oam_obj_by_name(type.value))
 
+def describe_oam_object(o: type[OAMObject]) -> list:
+    d = []
+    for field in fields(o):
+        json_name = field.metadata["json"] if "json" in field.metadata else field.name
+        d.append(json_name)
+            
+    return d
+
+def make_oam_object_from_dict(o: type[OAMObject], d: dict) -> OAMObject:
+    real_d = {}
+    o_fields = fields(o)
+    for key, value in d.items():
+        for field in o_fields:
+            if ("json" in field.metadata and field.metadata["json"] == key) \
+               or field.name == key:
+                real_d[field.name] = value
+                break
+        
+    return o(**real_d)
