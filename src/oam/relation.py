@@ -73,7 +73,7 @@ file_rels = {
 fqdn_rels = {
     "port": {RelationType.PortRelation: {AssetType.Service}},
     "dns_record": {
-        RelationType.BasicDNSRelation: {AssetType.FQDN, AssetType.IPAddress},
+        RelationType.BasicDNSRelation: {AssetType.FQDN, AssetType.IPAddress, AssetType.Identifier},
         RelationType.PrefDNSRelation: {AssetType.FQDN},
         RelationType.SRVDNSRelation: {AssetType.FQDN},
     },
