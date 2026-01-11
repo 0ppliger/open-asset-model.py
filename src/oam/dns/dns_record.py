@@ -14,6 +14,7 @@ class BasicDNSRelation(Relation):
     basic DNS resource record."""
     name:    str = field(metadata={"json":"label"})
     rrtype:  int = field(metadata={"json":"header_rrtype"})
+    rrname:  Optional[str] = field(metadata={"json":"header_rrname"})
     cls:     Optional[int] = field(default=None, metadata={"json":"header_class"})
     ttl:     Optional[int] = field(default=None, metadata={"json":"header_ttl"})
 
@@ -33,6 +34,7 @@ class PrefDNSRelation(Relation):
     name:       str = field(metadata={"json":"label"})
     preference: int
     rrtype:     int = field(metadata={"json":"header_rrtype"})
+    rrname:     Optional[str] = field(metadata={"json":"header_rrname"})
     cls:        Optional[int] = field(default=None, metadata={"json":"header_class"})
     ttl:        Optional[int] = field(default=None, metadata={"json":"header_ttl"})
 
@@ -53,6 +55,7 @@ class SRVDNSRelation(Relation):
     weight:   int
     port:     int
     rrtype:   int = field(metadata={"json":"header_rrtype"})
+    rrname:   Optional[str] = field(metadata={"json":"header_rrname"})
     cls:      Optional[int] = field(default=None, metadata={"json":"header_class"})
     ttl:      Optional[int] = field(default=None, metadata={"json":"header_ttl"})
 
@@ -71,6 +74,7 @@ class DNSRecordProperty(Property):
     property_name: str
     data:          str
     rrtype:        int = field(metadata={"json":"header_rrtype"})
+    rrname:        Optional[str] = field(metadata={"json":"header_rrname"})
     cls:           Optional[int] = field(default=None, metadata={"json":"header_class"})
     ttl:           Optional[int] = field(default=None, metadata={"json":"header_ttl"})
 
