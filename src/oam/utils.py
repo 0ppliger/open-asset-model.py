@@ -2,6 +2,7 @@ from __future__ import annotations
 from dataclasses import fields
 from dataclasses import is_dataclass
 import inspect
+import re
 from typing import cast
 from typing import Type, TypeVar, Mapping, Any
 from oam.oam_object import OAMObject
@@ -51,5 +52,12 @@ def make_oam_object_from_dict(o: Type[T], d: Mapping[str, Any]) -> T:
                or field.name == key:
                 real_d[field.name] = value
                 break
+
+    instance = o(**real_d)
+
+    extra_keys = list(filter(lambda e: e.startswith("extra_"), d.keys()))
+    for key in extra_keys:
+        real_key = re.sub(r"^extra_", "", key)
+        instance.extra[real_key] = d[key]
         
-    return o(**real_d)
+    return instance
