@@ -55,7 +55,7 @@ class Identifier(Asset):
     """
     unique_id:       str
     id:              str
-    type:            IdentifierType = field(metadata={"json":"id_type"})
+    type:            Optional[IdentifierType] = field(metadata={"json":"id_type"})
     creation_date:   Optional[str] = None
     update_date:     Optional[str] = None
     expiration_date: Optional[str] = None
