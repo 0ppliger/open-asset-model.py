@@ -1,4 +1,6 @@
 phonenumbers
+fqdn
+
 pytest
 pytest-subtests
 pyright

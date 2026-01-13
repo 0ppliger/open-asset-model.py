@@ -68,3 +68,10 @@ class Identifier(Asset):
     @property
     def asset_type(self) -> AssetType:
         return AssetType.Identifier
+
+    @staticmethod
+    def from_email(email: str) -> 'Identifier':
+        return Identifier(
+            email, email,
+            IdentifierType.EmailAddress
+        )

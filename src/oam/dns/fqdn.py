@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from oam.asset import AssetType
 from oam.asset import Asset
+from fqdn import FQDN as _FQDN
 
 @dataclass
 class FQDN(Asset):
@@ -14,3 +15,9 @@ class FQDN(Asset):
     @property
     def asset_type(self) -> AssetType:
         return AssetType.FQDN
+
+    @staticmethod
+    def from_text(fqdn: str) -> 'FQDN':
+        if not _FQDN(fqdn).is_valid:
+            raise ValueError("invalid fqdn")
+        return FQDN(name=fqdn)

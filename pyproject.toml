@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "open-asset-model"
-version = "1.0.0"
+version = "1.0.1"
 authors = [
   { name="J. Oppliger", email="julien@oppliger.cc" },
 ]
@@ -18,7 +18,8 @@ classifiers = [
 license = "Apache-2.0"
 license-files = ["LICENSE*"]
 dependencies = [
-  "phonenumbers"
+  "phonenumbers",
+  "fqdn"
 ]
 
 [project.urls]
