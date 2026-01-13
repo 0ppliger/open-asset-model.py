@@ -14,6 +14,7 @@ def test_basic_dns_relation_name():
     br = BasicDNSRelation(
         name=want,
         rrtype=1,
+        rrname="A",
         cls=1,
         ttl=86400
     )
@@ -26,11 +27,12 @@ def test_basic_dns_relation_implements_relation():
 def test_basic_dns_relation():
     dr = BasicDNSRelation(
         name="dns_record",
-        rrtype=1, cls=1, ttl=86400,
+        rrtype=1, rrname="A", cls=1, ttl=86400,
     )
 
     assert dr.name == "dns_record"
     assert dr.rrtype == 1
+    assert dr.rrname == "A"
     assert dr.cls == 1
     assert dr.ttl == 86400
     assert dr.relation_type == RelationType.BasicDNSRelation
@@ -39,6 +41,7 @@ def test_basic_dns_relation():
     expected_json = {
         "label": "dns_record",
         "header_rrtype": 1,
+        "header_rrname": "A",
         "header_class": 1,
         "header_ttl": 86400
     }
@@ -48,7 +51,7 @@ def test_pref_dns_relation_name():
     want = "dns_record"
     br = PrefDNSRelation(
         name=want,
-        rrtype=1, cls=1, ttl=86400,
+        rrtype=1, rrname="A", cls=1, ttl=86400,
         preference=5,
     )
 
@@ -60,12 +63,13 @@ def test_pref_dns_relation_implements_relation():
 def test_pref_dns_relation():
     pr = PrefDNSRelation(
         name="dns_record",
-        rrtype=1, cls=1, ttl=86400,
+        rrtype=1, rrname="A", cls=1, ttl=86400,
         preference=5,
     )
 
     assert pr.name == "dns_record"
     assert pr.rrtype == 1
+    assert pr.rrname == "A"
     assert pr.cls == 1
     assert pr.ttl == 86400
     assert pr.preference == 5
@@ -76,6 +80,7 @@ def test_pref_dns_relation():
         "label": "dns_record",
         "preference": 5,
         "header_rrtype": 1,
+        "header_rrname": "A",
         "header_class": 1,
         "header_ttl": 86400,
     }
@@ -85,7 +90,7 @@ def test_srv_dns_relation_name():
     want = "dns_record"
     br = SRVDNSRelation(
         name="dns_record",
-        rrtype=1, cls=1, ttl=86400,
+        rrtype=1, rrname="A", cls=1, ttl=86400,
         priority=10,
         weight=5,
         port=80
@@ -99,7 +104,7 @@ def test_srv_dns_relation_implements_relation():
 def test_srv_dns_relation():
     sr = SRVDNSRelation(
         name="dns_record",
-        rrtype=1, cls=1, ttl=86400,
+        rrtype=1, rrname="A", cls=1, ttl=86400,
         priority=10,
         weight=5,
         port=80
@@ -107,6 +112,7 @@ def test_srv_dns_relation():
 
     assert sr.name == "dns_record"
     assert sr.rrtype == 1
+    assert sr.rrname == "A"
     assert sr.cls == 1
     assert sr.ttl == 86400
     assert sr.priority == 10
@@ -118,6 +124,7 @@ def test_srv_dns_relation():
     expected_json = {
         "label": "dns_record",
         "header_rrtype": 1,
+        "header_rrname": "A",
         "header_class": 1,
         "header_ttl": 86400,
         "priority": 10,
@@ -129,7 +136,7 @@ def test_srv_dns_relation():
 def test_dns_record_property_name():
     p = DNSRecordProperty(
         property_name="anything",
-        rrtype=1, cls=1, ttl=86400,
+        rrtype=1, rrname="A", cls=1, ttl=86400,
         data="foobar"
     )
 
@@ -138,7 +145,7 @@ def test_dns_record_property_name():
 def test_dns_record_property_value():
     p = DNSRecordProperty(
         property_name="anything",
-        rrtype=1, cls=1, ttl=86400,
+        rrtype=1, rrname="A", cls=1, ttl=86400,
         data="foobar"
     )
 
@@ -150,7 +157,7 @@ def test_dns_record_property_implements_property():
 def test_dns_record_property():
     p = DNSRecordProperty(
         property_name="anything",
-        rrtype=16, cls=1, ttl=86400,
+        rrtype=16, rrname="TXT", cls=1, ttl=86400,
         data="foobar"
     )
 
@@ -163,6 +170,7 @@ def test_dns_record_property():
         "property_name": "anything",
         "data": "foobar",
         "header_rrtype": 16,
+        "header_rrname": "TXT",
         "header_class": 1,
         "header_ttl": 86400,
     }
