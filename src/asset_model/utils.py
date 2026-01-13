@@ -1,15 +1,13 @@
-from __future__ import annotations
 from dataclasses import fields
-from dataclasses import is_dataclass
+from typing import Type, TypeVar, cast
 import inspect
-import re
-from typing import cast
-from typing import Type, TypeVar, Mapping, Any
-from asset_model.oam_object import OAMObject
 import asset_model
-from typing import TYPE_CHECKING
-if TYPE_CHECKING:
-    from _typeshed import DataclassInstance
+from asset_model import OAMObject
+from asset_model import Asset, AssetType, AssetList
+from asset_model import Relation, RelationType, RelationList
+from asset_model import Property, PropertyType, PropertyList
+
+T = TypeVar("T", bound="OAMObject")
 
 def _get_oam_obj_by_name(name: str) -> Type[OAMObject]:
     for [_name, cls] in inspect.getmembers(asset_model, inspect.isclass):
@@ -18,46 +16,38 @@ def _get_oam_obj_by_name(name: str) -> Type[OAMObject]:
 
     raise Exception("unsupported oam object")
 
-def get_property_by_type(type: asset_model.PropertyType) -> Type[asset_model.Property]:
-    if type not in asset_model.PropertyList:
+def get_property_by_type(type: PropertyType) -> Type[Property]:
+    if type not in PropertyList:
         raise Exception("unsupported relation type")
-    return cast(Type[asset_model.Property], _get_oam_obj_by_name(type.value))
+    return cast(Type[Property], _get_oam_obj_by_name(type.value))
 
-def get_relation_by_type(type: asset_model.RelationType) -> Type[asset_model.Relation]:
-    if type not in asset_model.RelationList:
+def get_relation_by_type(type: RelationType) -> Type[Relation]:
+    if type not in RelationList:
         raise Exception("unsupported relation type")
-    return cast(Type[asset_model.Relation], _get_oam_obj_by_name(type.value))
+    return cast(Type[Relation], _get_oam_obj_by_name(type.value))
 
-def get_asset_by_type(type: asset_model.AssetType) -> Type[asset_model.Asset]:
-    if type not in asset_model.AssetList:
+def get_asset_by_type(type: AssetType) -> Type[Asset]:
+    if type not in AssetList:
         raise Exception("unsupported asset type")
-    return cast(Type[asset_model.Asset], _get_oam_obj_by_name(type.value))
+    return cast(Type[Asset], _get_oam_obj_by_name(type.value))
 
-def describe_oam_object(o: Type[OAMObject]) -> list:
+TypeResult = type[Asset] | type[Property] | type[Relation]
+
+def describe_type(o: TypeResult | AssetType | PropertyType | RelationType) -> list:
+    _o: TypeResult
+    match o:
+        case AssetType():
+            _o = get_asset_by_type(o)
+        case PropertyType():
+            _o = get_property_by_type(o)
+        case RelationType():
+            _o = get_relation_by_type(o)
+        case _:
+            _o = o
+    
     d = []
-    for field in fields(o):
+    for field in fields(_o):
         json_name = field.metadata["json"] if "json" in field.metadata else field.name
         d.append(json_name)
-            
+
     return d
-
-T = TypeVar("T", bound="OAMObject")
-
-def make_oam_object_from_dict(o: Type[T], d: Mapping[str, Any]) -> T:
-    real_d = {}
-    o_fields = fields(cast(Any, o))
-    for key, value in d.items():
-        for field in o_fields:
-            if ("json" in field.metadata and field.metadata["json"] == key) \
-               or field.name == key:
-                real_d[field.name] = value
-                break
-
-    instance = o(**real_d)
-
-    extra_keys = list(filter(lambda e: e.startswith("extra_"), d.keys()))
-    for key in extra_keys:
-        real_key = re.sub(r"^extra_", "", key)
-        instance.extra[real_key] = d[key]
-        
-    return instance
