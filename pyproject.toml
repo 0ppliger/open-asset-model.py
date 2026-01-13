@@ -27,4 +27,4 @@ Homepage = "https://github.com/0ppliger/open-asset-model.py"
 Issues = "https://github.com/0ppliger/open-asset-model.py/issues"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/oam"]
+packages = ["src/asset_model"]
