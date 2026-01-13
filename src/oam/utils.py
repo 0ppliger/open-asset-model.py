@@ -41,7 +41,7 @@ def describe_oam_object(o: Type[OAMObject]) -> list:
             
     return d
 
-T = TypeVar("T")
+T = TypeVar("T", bound="OAMObject")
 
 def make_oam_object_from_dict(o: Type[T], d: Mapping[str, Any]) -> T:
     real_d = {}

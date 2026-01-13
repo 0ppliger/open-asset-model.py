@@ -6,12 +6,11 @@ from dataclasses import fields
 from dataclasses import dataclass
 from dataclasses import is_dataclass
 from typing import Any
-from typing import Mapping
 from enum import Enum
 
 @dataclass(kw_only=True)
 class OAMObject(ABC):
-    extra: Mapping[str, Any] = field(default_factory=dict)
+    extra: dict[str, Any] = field(default_factory=dict)
     
     def to_dict(self) -> dict:
         d = {}
