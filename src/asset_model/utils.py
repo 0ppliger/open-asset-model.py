@@ -1,0 +1,63 @@
+from __future__ import annotations
+from dataclasses import fields
+from dataclasses import is_dataclass
+import inspect
+import re
+from typing import cast
+from typing import Type, TypeVar, Mapping, Any
+from asset_model.oam_object import OAMObject
+import asset_model
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from _typeshed import DataclassInstance
+
+def _get_oam_obj_by_name(name: str) -> Type[OAMObject]:
+    for [_name, cls] in inspect.getmembers(asset_model, inspect.isclass):
+        if _name == name:
+            return cast(type[OAMObject], cls)
+
+    raise Exception("unsupported oam object")
+
+def get_property_by_type(type: asset_model.PropertyType) -> Type[asset_model.Property]:
+    if type not in asset_model.PropertyList:
+        raise Exception("unsupported relation type")
+    return cast(Type[asset_model.Property], _get_oam_obj_by_name(type.value))
+
+def get_relation_by_type(type: asset_model.RelationType) -> Type[asset_model.Relation]:
+    if type not in asset_model.RelationList:
+        raise Exception("unsupported relation type")
+    return cast(Type[asset_model.Relation], _get_oam_obj_by_name(type.value))
+
+def get_asset_by_type(type: asset_model.AssetType) -> Type[asset_model.Asset]:
+    if type not in asset_model.AssetList:
+        raise Exception("unsupported asset type")
+    return cast(Type[asset_model.Asset], _get_oam_obj_by_name(type.value))
+
+def describe_oam_object(o: Type[OAMObject]) -> list:
+    d = []
+    for field in fields(o):
+        json_name = field.metadata["json"] if "json" in field.metadata else field.name
+        d.append(json_name)
+            
+    return d
+
+T = TypeVar("T", bound="OAMObject")
+
+def make_oam_object_from_dict(o: Type[T], d: Mapping[str, Any]) -> T:
+    real_d = {}
+    o_fields = fields(cast(Any, o))
+    for key, value in d.items():
+        for field in o_fields:
+            if ("json" in field.metadata and field.metadata["json"] == key) \
+               or field.name == key:
+                real_d[field.name] = value
+                break
+
+    instance = o(**real_d)
+
+    extra_keys = list(filter(lambda e: e.startswith("extra_"), d.keys()))
+    for key in extra_keys:
+        real_key = re.sub(r"^extra_", "", key)
+        instance.extra[real_key] = d[key]
+        
+    return instance
