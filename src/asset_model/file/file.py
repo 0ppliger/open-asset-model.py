@@ -1,3 +1,6 @@
+from mimetypes import guess_type
+from urllib.parse import urlparse
+from pathlib import Path
 from dataclasses import dataclass
 from typing import Optional
 from asset_model.asset import Asset, AssetType
@@ -16,3 +19,14 @@ class File(Asset):
     @property
     def asset_type(self) -> AssetType:
         return AssetType.File
+
+    @staticmethod
+    def from_url(url: str) -> 'File':
+        filename = Path(urlparse(url).path).name
+        filetype,_ = guess_type(filename)
+        return File(
+            url  = url,
+            name = filename,
+            type = filetype
+        )
+        
