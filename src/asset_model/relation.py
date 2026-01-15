@@ -174,6 +174,7 @@ tlscert_rels = {
     "issuing_certificate": {RelationType.SimpleRelation: {AssetType.TLSCertificate}},
     "issuing_certificate_url": {RelationType.SimpleRelation: {AssetType.URL}},
     "ocsp_server": {RelationType.SimpleRelation: {AssetType.URL}},
+    "certificate_authority": {RelationType.SimpleRelation: {AssetType.Organization}},
 }
 
 url_rels = {
