@@ -80,6 +80,7 @@ fqdn_rels = {
     "node": {RelationType.SimpleRelation: {AssetType.FQDN}},
     "registration": {RelationType.SimpleRelation: {AssetType.DomainRecord}},
     "verified_for": {RelationType.SimpleRelation: {AssetType.Organization, AssetType.Service}},
+    "domain_verification": {RelationType.SimpleRelation: {AssetType.Product}},
 }
 
 funds_transfer_rels = {
