@@ -48,6 +48,8 @@ class OAMObject(ABC):
             if json_value is not None:
                 if isinstance(json_value, Enum):
                     d[json_name] = json_value.value
+                elif isinstance(json_value, OAMObject):
+                    d[json_name] = json_value.to_dict()
                 else:  
                     d[json_name] = json_value
 

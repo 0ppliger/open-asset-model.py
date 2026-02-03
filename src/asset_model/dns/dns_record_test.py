@@ -31,19 +31,21 @@ def test_basic_dns_relation():
     )
 
     assert dr.name == "dns_record"
-    assert dr.rrtype == 1
-    assert dr.rrname == "A"
-    assert dr.cls == 1
-    assert dr.ttl == 86400
+    assert dr.header.rrtype == 1
+    assert dr.header.rrname == "A"
+    assert dr.header.cls == 1
+    assert dr.header.ttl == 86400
     assert dr.relation_type == RelationType.BasicDNSRelation
 
     json_data = dr.to_dict()
     expected_json = {
         "label": "dns_record",
-        "header_rrtype": 1,
-        "header_rrname": "A",
-        "header_class": 1,
-        "header_ttl": 86400
+        "header": {
+            "rr_type": 1,
+            "rr_name": "A",
+            "class": 1,
+            "ttl": 86400            
+        }
     }
     assert json_data == expected_json
 
@@ -68,10 +70,10 @@ def test_pref_dns_relation():
     )
 
     assert pr.name == "dns_record"
-    assert pr.rrtype == 1
-    assert pr.rrname == "A"
-    assert pr.cls == 1
-    assert pr.ttl == 86400
+    assert pr.header.rrtype == 1
+    assert pr.header.rrname == "A"
+    assert pr.header.cls == 1
+    assert pr.header.ttl == 86400
     assert pr.preference == 5
     assert pr.relation_type is RelationType.PrefDNSRelation
 
@@ -79,10 +81,12 @@ def test_pref_dns_relation():
     expected_json = {
         "label": "dns_record",
         "preference": 5,
-        "header_rrtype": 1,
-        "header_rrname": "A",
-        "header_class": 1,
-        "header_ttl": 86400,
+        "header": {
+            "rr_type": 1,
+            "rr_name": "A",
+            "class": 1,
+            "ttl": 86400            
+        }
     }
     assert json_data == expected_json
 
@@ -111,10 +115,10 @@ def test_srv_dns_relation():
     )
 
     assert sr.name == "dns_record"
-    assert sr.rrtype == 1
-    assert sr.rrname == "A"
-    assert sr.cls == 1
-    assert sr.ttl == 86400
+    assert sr.header.rrtype == 1
+    assert sr.header.rrname == "A"
+    assert sr.header.cls == 1
+    assert sr.header.ttl == 86400
     assert sr.priority == 10
     assert sr.weight == 5
     assert sr.port == 80
@@ -123,10 +127,12 @@ def test_srv_dns_relation():
     json_data = sr.to_dict()
     expected_json = {
         "label": "dns_record",
-        "header_rrtype": 1,
-        "header_rrname": "A",
-        "header_class": 1,
-        "header_ttl": 86400,
+        "header": {
+            "rr_type": 1,
+            "rr_name": "A",
+            "class": 1,
+            "ttl": 86400            
+        },
         "priority": 10,
         "weight": 5,
         "port": 80,
@@ -169,9 +175,11 @@ def test_dns_record_property():
     expected_json = {
         "property_name": "anything",
         "data": "foobar",
-        "header_rrtype": 16,
-        "header_rrname": "TXT",
-        "header_class": 1,
-        "header_ttl": 86400,
+        "header": {
+            "rr_type": 16,
+            "rr_name": "TXT",
+            "class": 1,
+            "ttl": 86400            
+        }
     }
     assert json_data == expected_json
