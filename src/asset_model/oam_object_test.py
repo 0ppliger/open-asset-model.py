@@ -1,4 +1,4 @@
-from asset_model import AssetType, RelationType, OAMObject
+from asset_model import AssetType, RelationType, OAMObject, FQDN, BasicDNSRelation
 from asset_model import URL
 
 def test_clone_works():
@@ -47,3 +47,17 @@ def test_override_with_works():
     assert overrided.raw    == "http://exemple.com/"
     assert overrided.host   == "exemple.com"
     assert overrided.scheme == "http"
+
+def test_from_dict():
+    d = {
+        "name": "dns_record",
+        "header": {
+            "rr_type": 1,
+            "cls": 1,
+            "ttl": 1
+        }
+    }
+    rel = OAMObject.from_dict(BasicDNSRelation, d)
+    print(rel)
+    assert rel.name == "dns_record"
+    assert rel.header.rrtype == 1

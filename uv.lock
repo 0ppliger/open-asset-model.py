@@ -1,0 +1,36 @@
+version = 1
+revision = 3
+requires-python = ">=3.10"
+
+[[package]]
+name = "fqdn"
+version = "1.5.1"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/30/3e/a80a8c077fd798951169626cde3e239adeba7dab75deb3555716415bd9b0/fqdn-1.5.1.tar.gz", hash = "sha256:105ed3677e767fb5ca086a0c1f4bb66ebc3c100be518f0e0d755d9eae164d89f", size = 6015, upload-time = "2021-03-11T07:16:29.08Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/cf/58/8acf1b3e91c58313ce5cb67df61001fc9dcd21be4fadb76c1a2d540e09ed/fqdn-1.5.1-py3-none-any.whl", hash = "sha256:3a179af3761e4df6eb2e026ff9e1a3033d3587bf980a0b1b2e1e5d08d7358014", size = 9121, upload-time = "2021-03-11T07:16:28.351Z" },
+]
+
+[[package]]
+name = "open-asset-model"
+version = "1.1.2"
+source = { editable = "." }
+dependencies = [
+    { name = "fqdn" },
+    { name = "phonenumbers" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "fqdn" },
+    { name = "phonenumbers" },
+]
+
+[[package]]
+name = "phonenumbers"
+version = "9.0.23"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/e5/1a/d1a90630b5f5e6ff3918f1ab6958430c051c3f311610780bcd9bc7200a5d/phonenumbers-9.0.23.tar.gz", hash = "sha256:e5aa44844684ffb4928f25a7b8c31dbf6e3763138cb13edd2ab03bf6d4803d98", size = 2298342, upload-time = "2026-02-04T15:58:16.916Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/06/91/17099726260627a23109abf9590b02f08ff3798e3722d760a1f142d9932d/phonenumbers-9.0.23-py2.py3-none-any.whl", hash = "sha256:f29651fb72ba4d22d2691bb0b432f1d2c93fd49cc7b89aa6c11bd6b0e4167412", size = 2584396, upload-time = "2026-02-04T15:58:13.529Z" },
+]
